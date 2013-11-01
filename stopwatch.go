@@ -64,6 +64,10 @@ func (s Stopwatch) Nanoseconds() int64 {
 	return s.acc.Nanoseconds()
 }
 
+func (s Stopwatch) Duration() time.Duration {
+	return s.acc
+}
+
 // Returns the accumulated seconds of the stopwatch. If the stopwatch is
 // currently running that will not be accounted for.
 func (s Stopwatch) Seconds() float64 {
