@@ -30,15 +30,19 @@ func (s *Stopwatch) Start() {
 }
 
 // Stops counting elapsed wall-clock time
-func (s *Stopwatch) Stop() {
-	s.acc = time.Since(s.t)
+func (s *Stopwatch) Stop() time.Duration {
+	d := time.Since(s.t)
+	s.acc += d
+	return d
 }
 
 // Equivalent to s.Stop(); s2.Start() with no time elapsed between,
 // just using one time stamp.
-func (s *Stopwatch) Handover(s2 *Stopwatch) {
+func (s *Stopwatch) Handover(s2 *Stopwatch) time.Duration {
 	s2.t = time.Now()
-	s.acc = s.t.Sub(s2.t)
+	d := s.t.Sub(s2.t)
+	s.acc += d
+	return d
 }
 
 // Takes a snapshot of a currently running stopwatch. If the stopwatch
