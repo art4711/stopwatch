@@ -40,7 +40,7 @@ func (s *Stopwatch) Stop() time.Duration {
 // just using one time stamp.
 func (s *Stopwatch) Handover(s2 *Stopwatch) time.Duration {
 	s2.t = time.Now()
-	d := s.t.Sub(s2.t)
+	d := s2.t.Sub(s.t)
 	s.acc += d
 	return d
 }
